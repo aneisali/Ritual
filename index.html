@@ -3,10 +3,6 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/twemoji.min.css"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/twemoji.min.js"></script>
-<script>window.onload=()=>twemoji.parse(document.body);</script>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>ritual.</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
@@ -19,41 +15,35 @@ nav{background:var(--white);border-bottom:1px solid var(--blush);padding:0 20px;
 .tab{padding:6px 14px;border-radius:20px;border:none;background:transparent;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--mid);transition:all .2s}
 .tab:hover{background:var(--blush)}.tab.active{background:var(--graphite);color:var(--white)}
 .navscore{font-size:12px;color:var(--mid)}
-main{max-width:1100px;margin:0 auto;padding:28px 20px}
+main{max-width:900px;margin:0 auto;padding:28px 20px}
 .ptitle{font-family:'Playfair Display',serif;font-size:26px;font-weight:600;margin-bottom:4px}
 .psub{font-size:13px;color:var(--mid);margin-bottom:24px}
 .card{background:rgba(255,255,255,0.85);border:1px solid var(--blush);border-radius:16px;padding:20px 22px;margin-bottom:16px}
 .g4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:16px}
 .g2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:16px}
 @media(max-width:800px){.g4{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:500px){.g4,.g2{grid-template-columns:1fr}.tabs .tab{padding:6px 9px;font-size:11px}}
+@media(max-width:500px){.g4,.g2{grid-template-columns:1fr}.tab{padding:6px 9px;font-size:11px}}
 .sectitle{font-family:'Playfair Display',serif;font-size:17px;font-weight:600;margin-bottom:14px}
 .sclabel{font-size:11px;color:var(--mid);text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px}
 .scbig{font-family:'Playfair Display',serif;font-size:36px;font-weight:600;line-height:1}
 .tc{text-align:center}
-/* Ring */
-.ring-wrap{display:flex;justify-content:center;margin-bottom:8px}
-svg.ring circle{transition:stroke-dasharray .5s}
-/* Habits */
-.hrow{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--blush)}
+.hrow{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--blush)}
 .hrow:last-child{border-bottom:none}
 .hname{font-size:14px;font-weight:500}.hsub{font-size:12px;color:var(--mid);margin-top:2px}
 .hcontrols{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}
 .cb{width:24px;height:24px;border-radius:6px;border:2px solid var(--soft);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;transition:all .15s;flex-shrink:0;user-select:none;font-weight:700}
 .cb.onr{background:var(--rose);border-color:var(--rose);color:white}
 .cb.ong{background:var(--graphite);border-color:var(--graphite);color:white}
-.ninput{width:50px;height:30px;border:1.5px solid var(--soft);border-radius:8px;text-align:center;font-family:'DM Sans',sans-serif;font-size:14px;background:var(--white);outline:none;color:var(--graphite)}
+.ninput{width:52px;height:32px;border:1.5px solid var(--soft);border-radius:8px;text-align:center;font-family:'DM Sans',sans-serif;font-size:14px;background:var(--white);outline:none;color:var(--graphite)}
 .ninput:focus{border-color:var(--rose)}
-.pbar{height:5px;background:var(--blush);border-radius:3px;overflow:hidden;margin-top:5px}
+.pbar{height:5px;background:var(--blush);border-radius:3px;overflow:hidden;margin-top:6px}
 .pfill{height:100%;border-radius:3px;transition:width .4s}
-/* Toggle */
 .tog{position:relative;width:42px;height:23px;flex-shrink:0}
 .tog input{opacity:0;width:0;height:0}
 .tsl{position:absolute;inset:0;background:var(--soft);border-radius:12px;cursor:pointer;transition:.3s}
 .tsl::before{content:'';position:absolute;width:17px;height:17px;left:3px;top:3px;background:white;border-radius:50%;transition:.3s}
 input:checked+.tsl{background:var(--rose)}
 input:checked+.tsl::before{transform:translateX(19px)}
-/* Buttons */
 .btn{padding:8px 18px;border-radius:10px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;font-size:13px;transition:all .2s}
 .btnd{background:var(--graphite);color:white}.btnd:hover{background:#444}
 .btnr{background:var(--rose);color:white}
@@ -62,34 +52,18 @@ input:checked+.tsl::before{transform:translateX(19px)}
 .inp{width:100%;padding:9px 13px;border:1.5px solid var(--soft);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;background:var(--white);outline:none;color:var(--graphite)}
 .inp:focus{border-color:var(--rose)}
 .lbl{font-size:11px;font-weight:500;color:var(--mid);text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px;display:block}
-/* Normas */
 .norma{display:flex;align-items:flex-start;gap:8px;padding:9px 0;border-bottom:1px solid var(--blush)}
 .norma:last-child{border-bottom:none}
 .ndot{width:5px;height:5px;border-radius:50%;background:var(--rose);margin-top:8px;flex-shrink:0}
 .ntext{font-size:14px;line-height:1.5}
-/* Calendar */
-.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
-.cal-hdr{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:6px}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.cal-hdr{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:8px}
 .cal-hdr span{text-align:center;font-size:10px;color:var(--mid);text-transform:uppercase}
-.cday{aspect-ratio:1;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px}
-/* Bar chart CSS */
-.barchart{display:flex;align-items:flex-end;gap:6px;height:120px;margin-top:8px}
-.bar-col{display:flex;flex-direction:column;align-items:center;flex:1;gap:4px;height:100%}
-.bar-wrap{flex:1;width:100%;display:flex;align-items:flex-end;justify-content:center}
-.bar{width:70%;border-radius:4px 4px 0 0;transition:height .4s;min-height:2px}
-.bar-label{font-size:11px;color:var(--mid)}
-.bar-val{font-size:11px;font-weight:500;color:var(--graphite)}
-/* Line chart CSS */
-.linechart{margin-top:8px;position:relative;height:120px}
-.linechart canvas{width:100%!important}
-/* Emergency */
+.cday{aspect-ratio:1;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px}
 .emg{background:linear-gradient(135deg,#F2DDD6,#F7EAD8);border:1.5px solid var(--rose);border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:10px;margin-bottom:16px}
-/* Streak */
 .streak{display:inline-flex;align-items:center;gap:3px;background:var(--blush);color:var(--rose-deep);padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500}
-/* Utils */
 .flex{display:flex}.aic{align-items:center}.jsb{justify-content:space-between}
-.gap8{gap:8px}.gap14{gap:14px}
-.mt8{margin-top:8px}.mt14{margin-top:14px}.mt16{margin-top:16px}
+.gap8{gap:8px}.mt8{margin-top:8px}.mt14{margin-top:14px}.mt16{margin-top:16px}
 .mb8{margin-bottom:8px}.mb14{margin-bottom:14px}.mb16{margin-bottom:16px}
 .good{color:var(--success)}.warnc{color:var(--warn)}.badc{color:var(--rose-deep)}
 .hidden{display:none}
@@ -98,10 +72,15 @@ input:checked+.tsl::before{transform:translateX(19px)}
 .legend{display:flex;gap:14px;margin-top:12px;flex-wrap:wrap}
 .legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--mid)}
 .legend-dot{width:10px;height:10px;border-radius:3px}
+.barchart{display:flex;align-items:flex-end;gap:6px;height:120px;margin-top:8px}
+.bar-col{display:flex;flex-direction:column;align-items:center;flex:1;gap:4px;height:100%}
+.bar-wrap{flex:1;width:100%;display:flex;align-items:flex-end;justify-content:center}
+.bar{width:70%;border-radius:4px 4px 0 0;transition:height .4s;min-height:2px}
+.bar-label{font-size:11px;color:var(--mid)}
+.bar-val{font-size:11px;font-weight:500}
 </style>
 </head>
 <body>
-
 <nav>
   <div class="logo">ritual<span>.</span></div>
   <div class="tabs">
@@ -120,40 +99,40 @@ input:checked+.tsl::before{transform:translateX(19px)}
     <p class="psub">Sistema de ejecución · 12 Week Year</p>
 
     <div id="emg-banner" class="emg hidden">
-      <span style="font-size:20px">⚡</span>
       <div>
-        <div style="font-size:13px;color:var(--rose-deep);font-weight:500">Modo Emergencia — Meta: 3 convs · Selling: 15 min</div>
-        <div style="font-size:12px;color:var(--rose);margin-top:2px">El día cuenta. Tú puedes. 💪</div>
+        <div style="font-size:13px;color:var(--rose-deep);font-weight:500">Modo Emergencia activado — Meta: 3 convs · Selling: 15 min</div>
+        <div style="font-size:12px;color:var(--rose);margin-top:2px">El dia cuenta. Tu puedes.</div>
       </div>
     </div>
 
-    <div class="g4">
-      <div class="card tc">
-        <div class="ring-wrap"><svg class="ring" width="88" height="88" viewBox="0 0 88 88" id="ring-hoy">
-          <circle cx="44" cy="44" r="37" fill="none" stroke="#F2DDD6" stroke-width="7"/>
-          <circle cx="44" cy="44" r="37" fill="none" stroke="#D4927A" stroke-width="7" stroke-dasharray="0 232" stroke-linecap="round" transform="rotate(-90 44 44)" id="ring-hoy-fill"/>
-          <text x="44" y="44" text-anchor="middle" dominant-baseline="central" id="ring-hoy-txt" style="font-family:'Playfair Display',serif;font-size:18px;fill:#2C2C2C;font-weight:600">0%</text>
-        </svg></div>
-        <div class="sclabel">Score Hoy</div>
-        <div id="score-estado" style="font-size:13px;font-weight:500;margin-top:4px;color:var(--mid)">Empieza el día</div>
+    <!-- Rings -->
+    <div style="display:flex;justify-content:center;gap:32px;margin-bottom:24px;flex-wrap:wrap">
+      <div class="tc">
+        <svg width="90" height="90" viewBox="0 0 90 90">
+          <circle cx="45" cy="45" r="38" fill="none" stroke="#F2DDD6" stroke-width="7"/>
+          <circle cx="45" cy="45" r="38" fill="none" stroke="#D4927A" stroke-width="7" stroke-dasharray="0 239" stroke-linecap="round" transform="rotate(-90 45 45)" id="ring-hoy-fill"/>
+          <text x="45" y="45" text-anchor="middle" dominant-baseline="central" id="ring-hoy-txt" style="font-family:'Playfair Display',serif;font-size:17px;fill:#2C2C2C;font-weight:600">0%</text>
+        </svg>
+        <div class="sclabel">Hoy</div>
+        <div id="score-estado" style="font-size:12px;font-weight:500;margin-top:2px;color:var(--mid)">Empieza</div>
       </div>
-      <div class="card tc">
-        <div class="ring-wrap"><svg class="ring" width="88" height="88" viewBox="0 0 88 88" id="ring-sem">
-          <circle cx="44" cy="44" r="37" fill="none" stroke="#F2DDD6" stroke-width="7"/>
-          <circle cx="44" cy="44" r="37" fill="none" stroke="#D4927A" stroke-width="7" stroke-dasharray="0 232" stroke-linecap="round" transform="rotate(-90 44 44)" id="ring-sem-fill"/>
-          <text x="44" y="44" text-anchor="middle" dominant-baseline="central" id="ring-sem-txt" style="font-family:'Playfair Display',serif;font-size:18px;fill:#2C2C2C;font-weight:600">0%</text>
-        </svg></div>
-        <div class="sclabel">Score Semana</div>
+      <div class="tc">
+        <svg width="90" height="90" viewBox="0 0 90 90">
+          <circle cx="45" cy="45" r="38" fill="none" stroke="#F2DDD6" stroke-width="7"/>
+          <circle cx="45" cy="45" r="38" fill="none" stroke="#D4927A" stroke-width="7" stroke-dasharray="0 239" stroke-linecap="round" transform="rotate(-90 45 45)" id="ring-sem-fill"/>
+          <text x="45" y="45" text-anchor="middle" dominant-baseline="central" id="ring-sem-txt" style="font-family:'Playfair Display',serif;font-size:17px;fill:#2C2C2C;font-weight:600">0%</text>
+        </svg>
+        <div class="sclabel">Semana</div>
       </div>
-      <div class="card tc">
-        <div class="ring-wrap"><svg class="ring" width="88" height="88" viewBox="0 0 88 88" id="ring-mes">
-          <circle cx="44" cy="44" r="37" fill="none" stroke="#F2DDD6" stroke-width="7"/>
-          <circle cx="44" cy="44" r="37" fill="none" stroke="#D4927A" stroke-width="7" stroke-dasharray="0 232" stroke-linecap="round" transform="rotate(-90 44 44)" id="ring-mes-fill"/>
-          <text x="44" y="44" text-anchor="middle" dominant-baseline="central" id="ring-mes-txt" style="font-family:'Playfair Display',serif;font-size:18px;fill:#2C2C2C;font-weight:600">0%</text>
-        </svg></div>
-        <div class="sclabel">Score Mes</div>
+      <div class="tc">
+        <svg width="90" height="90" viewBox="0 0 90 90">
+          <circle cx="45" cy="45" r="38" fill="none" stroke="#F2DDD6" stroke-width="7"/>
+          <circle cx="45" cy="45" r="38" fill="none" stroke="#D4927A" stroke-width="7" stroke-dasharray="0 239" stroke-linecap="round" transform="rotate(-90 45 45)" id="ring-mes-fill"/>
+          <text x="45" y="45" text-anchor="middle" dominant-baseline="central" id="ring-mes-txt" style="font-family:'Playfair Display',serif;font-size:17px;fill:#2C2C2C;font-weight:600">0%</text>
+        </svg>
+        <div class="sclabel">Mes</div>
       </div>
-      <div class="card">
+      <div class="card" style="min-width:160px;margin-bottom:0">
         <div class="sclabel mb8">Conversaciones hoy</div>
         <div class="scbig"><span id="conv-hoy">0</span><span style="font-size:18px;color:var(--mid)" id="conv-max">/10</span></div>
         <div class="pbar mt8"><div class="pfill" id="conv-bar" style="width:0%;background:var(--rose)"></div></div>
@@ -161,6 +140,7 @@ input:checked+.tsl::before{transform:translateX(19px)}
       </div>
     </div>
 
+    <!-- Habits -->
     <div class="card">
       <div class="flex aic jsb mb14">
         <div class="sectitle" style="margin-bottom:0">Hábitos de Hoy</div>
@@ -172,6 +152,7 @@ input:checked+.tsl::before{transform:translateX(19px)}
       <div id="habits-list"></div>
     </div>
 
+    <!-- Charts -->
     <div class="g2">
       <div class="card">
         <div class="sectitle">Conversaciones · Semana</div>
@@ -225,15 +206,17 @@ input:checked+.tsl::before{transform:translateX(19px)}
       </div>
       <div class="card">
         <div class="sectitle">Conversión & Meta</div>
-        <div style="margin-bottom:14px">
-          <div class="flex aic jsb mb8"><span style="font-size:13px">Citas / Conversaciones</span><span id="rate1" style="font-weight:600;color:var(--rose)">0%</span></div>
-          <div class="pbar"><div class="pfill" id="rate1-bar" style="width:0%;background:var(--rose)"></div></div>
+        <div style="display:grid;gap:14px">
+          <div>
+            <div class="flex aic jsb mb8"><span style="font-size:13px">Citas / Conversaciones</span><span id="rate1" style="font-weight:600;color:var(--rose)">0%</span></div>
+            <div class="pbar"><div class="pfill" id="rate1-bar" style="width:0%"></div></div>
+          </div>
+          <div>
+            <div class="flex aic jsb mb8"><span style="font-size:13px">Cierres / Citas</span><span id="rate2" style="font-weight:600;color:var(--rose)">0%</span></div>
+            <div class="pbar"><div class="pfill" id="rate2-bar" style="width:0%"></div></div>
+          </div>
+          <div><label class="lbl">Meta ingresos mensual ($)</label><input class="inp" type="number" id="meta-input" placeholder="15000" oninput="saveMeta(this.value)"></div>
         </div>
-        <div style="margin-bottom:14px">
-          <div class="flex aic jsb mb8"><span style="font-size:13px">Cierres / Citas</span><span id="rate2" style="font-weight:600;color:var(--rose)">0%</span></div>
-          <div class="pbar"><div class="pfill" id="rate2-bar" style="width:0%;background:var(--rose)"></div></div>
-        </div>
-        <div><label class="lbl">Meta ingresos mensual ($)</label><input class="inp" type="number" id="meta-input" placeholder="15000" oninput="saveMeta(this.value)"></div>
       </div>
     </div>
   </div>
@@ -244,15 +227,15 @@ input:checked+.tsl::before{transform:translateX(19px)}
     <p class="psub">Historial de ejecución</p>
     <div class="card">
       <div class="flex aic jsb mb16">
-        <button class="btn btno btns" onclick="calNav(-1)">‹</button>
+        <button class="btn btno btns" onclick="calNav(-1)">&#8249;</button>
         <span id="cal-title" style="font-family:'Playfair Display',serif;font-size:17px;font-weight:600"></span>
-        <button class="btn btno btns" onclick="calNav(1)">›</button>
+        <button class="btn btno btns" onclick="calNav(1)">&#8250;</button>
       </div>
-      <div class="cal-hdr"><span>Lu</span><span>Ma</span><span>Mi</span><span>Ju</span><span>Vi</span><span>Sá</span><span>Do</span></div>
+      <div class="cal-hdr"><span>Lu</span><span>Ma</span><span>Mi</span><span>Ju</span><span>Vi</span><span>Sa</span><span>Do</span></div>
       <div class="cal-grid" id="cal-grid"></div>
       <div class="legend mt14">
         <div class="legend-item"><div class="legend-dot" style="background:#8BAF8B60"></div>≥80%</div>
-        <div class="legend-item"><div class="legend-dot" style="background:#D4B27A60"></div>50–79%</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#D4B27A60"></div>50-79%</div>
         <div class="legend-item"><div class="legend-dot" style="background:#D4927A60"></div>&lt;50%</div>
       </div>
     </div>
@@ -276,20 +259,20 @@ input:checked+.tsl::before{transform:translateX(19px)}
       </div>
       <div class="card">
         <div class="sectitle">Sistema de Emergencia</div>
-        <div class="norma"><div class="ndot"></div><div class="ntext">Conversaciones bajan de 10 → 3</div></div>
-        <div class="norma"><div class="ndot"></div><div class="ntext">Selling learning: solo 15 min mínimo</div></div>
+        <div class="norma"><div class="ndot"></div><div class="ntext">Conversaciones bajan de 10 a 3</div></div>
+        <div class="norma"><div class="ndot"></div><div class="ntext">Selling learning: solo 15 min minimo</div></div>
         <div class="norma"><div class="ndot"></div><div class="ntext">Score se recalcula con metas reducidas</div></div>
         <div class="norma"><div class="ndot"></div><div class="ntext">80% ajustado = victoria sin culpa</div></div>
-        <div class="norma"><div class="ndot"></div><div class="ntext">Actívalo con el toggle en Hábitos de Hoy</div></div>
+        <div class="norma"><div class="ndot"></div><div class="ntext">Activalo con el toggle en Habitos de Hoy</div></div>
       </div>
     </div>
     <div class="card">
       <div class="sectitle">Recordatorios</div>
       <div class="g4" style="margin-bottom:14px">
-        <div><label class="lbl">🌅 Producción mañana</label><input class="inp" type="time" id="rem0" oninput="saveReminder(0,this.value)"></div>
-        <div><label class="lbl">🥗 Almuerzo + vitaminas</label><input class="inp" type="time" id="rem1" oninput="saveReminder(1,this.value)"></div>
-        <div><label class="lbl">💪 Bloque fuerte tarde</label><input class="inp" type="time" id="rem2" oninput="saveReminder(2,this.value)"></div>
-        <div><label class="lbl">🌙 Cierre de día</label><input class="inp" type="time" id="rem3" oninput="saveReminder(3,this.value)"></div>
+        <div><label class="lbl">Produccion manana</label><input class="inp" type="time" id="rem0" oninput="saveReminder(0,this.value)"></div>
+        <div><label class="lbl">Almuerzo + vitaminas</label><input class="inp" type="time" id="rem1" oninput="saveReminder(1,this.value)"></div>
+        <div><label class="lbl">Bloque fuerte tarde</label><input class="inp" type="time" id="rem2" oninput="saveReminder(2,this.value)"></div>
+        <div><label class="lbl">Cierre de dia</label><input class="inp" type="time" id="rem3" oninput="saveReminder(3,this.value)"></div>
       </div>
       <button class="btn btnd btns" id="notif-btn" onclick="askNotif()">Activar notificaciones</button>
     </div>
@@ -297,26 +280,22 @@ input:checked+.tsl::before{transform:translateX(19px)}
 </main>
 
 <script>
-// ── Storage ──────────────────────────────────────────────
 const todayKey=()=>new Date().toISOString().slice(0,10);
 const load=(k,def)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):def;}catch{return def;}};
 const save=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
 
 let logs=load('rit_logs',{});
 let sales=load('rit_sales',{});
-let cfg=load('rit_cfg',{incomeGoal:15000,normas:["Nunca fallar dos veces consecutivas.","El día cuenta si cumplo lead measures.","80% = victoria.","Modo Emergencia: conversaciones bajan a 3, selling a 15 min.","Los hábitos forman sistemas, los sistemas forman resultados."],reminders:["09:00","12:30","16:30","21:00"]});
+let cfg=load('rit_cfg',{incomeGoal:15000,normas:["Nunca fallar dos veces consecutivas.","El dia cuenta si cumplo lead measures.","80% = victoria.","Modo Emergencia: conversaciones bajan a 3, selling a 15 min.","Los habitos forman sistemas, los sistemas forman resultados."],reminders:["09:00","12:30","16:30","21:00"]});
 
 const today=todayKey();
 let calState={y:new Date().getFullYear(),m:new Date().getMonth()};
 let editingNormas=false;
-
 const tlog=()=>logs[today]||{};
 const em=()=>tlog().emergency||false;
-
-const WD=["Lu","Ma","Mi","Ju","Vi","Sá","Do"];
+const WD=["Lu","Ma","Mi","Ju","Vi","Sa","Do"];
 const MONTHS=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
 
-// ── Score ─────────────────────────────────────────────────
 function calcScore(log,emergency){
   if(!log)return 0;
   const max=emergency?3:10;
@@ -334,19 +313,16 @@ function calcScore(log,emergency){
 
 function scolor(s){return s>=0.8?"#8BAF8B":s>=0.5?"#D4B27A":"#D4927A";}
 
-// ── Ring ──────────────────────────────────────────────────
 function updateRing(id,score){
-  const circ=2*Math.PI*37;
+  const circ=2*Math.PI*38;
   const fill=document.getElementById(id+'-fill');
   const txt=document.getElementById(id+'-txt');
   if(!fill||!txt)return;
-  const d=circ*score;
-  fill.setAttribute('stroke-dasharray',`${d} ${circ}`);
+  fill.setAttribute('stroke-dasharray',`${circ*score} ${circ}`);
   fill.setAttribute('stroke',scolor(score));
   txt.textContent=Math.round(score*100)+'%';
 }
 
-// ── Week dates ────────────────────────────────────────────
 function getWeekDates(){
   const n=new Date(),m=new Date(n);
   m.setDate(n.getDate()-((n.getDay()+6)%7));
@@ -359,7 +335,6 @@ function getMonthDates(y,mo){
   return{days,startDow:(new Date(y,mo,1).getDay()+6)%7};
 }
 
-// ── Streak ────────────────────────────────────────────────
 function streak(id){
   let s=0;const d=new Date();
   while(s<365){
@@ -371,7 +346,6 @@ function streak(id){
   return s;
 }
 
-// ── Update log ────────────────────────────────────────────
 function upLog(k,v){
   if(!logs[today])logs[today]={};
   logs[today][k]=v;
@@ -379,34 +353,31 @@ function upLog(k,v){
   refreshAll();
 }
 
-// ── Habits render ─────────────────────────────────────────
 const HABITS=[
   {id:'convs',label:'Conversaciones',type:'num'},
   {id:'selling',label:'Selling Learning',sub:'Anota minutos (opcional)',type:'checkmin'},
   {id:'gym',label:'Gym',sub:'4×semana',type:'check'},
   {id:'walk',label:'Walk con Polo',sub:'7×semana',type:'check'},
-  {id:'food',label:'Comidas saludables',sub:'Meta ≥80% del día',type:'pct'},
+  {id:'food',label:'Comidas saludables',sub:'Meta ≥80% del dia',type:'pct'},
   {id:'journal',label:'Journaling',sub:'5×semana',type:'check'},
   {id:'reading',label:'Lectura',sub:'5×semana',type:'check'},
-  {id:'vit_m',label:'Vitaminas Mañana',type:'check'},
+  {id:'vit_m',label:'Vitaminas Manana',type:'check'},
   {id:'vit_t',label:'Vitaminas Tarde',type:'check'},
   {id:'vit_n',label:'Vitaminas Noche',type:'check'},
 ];
 
 function renderHabits(){
-  const log=tlog(),emergency=em();
-  const max=emergency?3:10;
+  const log=tlog(),emergency=em(),max=emergency?3:10;
   let html='';
   HABITS.forEach(h=>{
-    const sub=h.id==='convs'?(emergency?'Meta: 3 (Emergencia)':'Meta: 10 (L–V)'):h.sub||'';
+    const sub=h.id==='convs'?(emergency?'Meta: 3 (Emergencia)':'Meta: 10 (L-V)'):h.sub||'';
     if(h.type==='num'){
       const val=log[h.id]||0,pct=Math.min(100,(val/max)*100);
-      const col=scolor(val/max);
       html+=`<div class="hrow">
         <div style="flex:1;min-width:0;margin-right:12px">
           <div class="hname">${h.label}</div>
           <div class="hsub">${sub}</div>
-          <div class="pbar" style="width:min(140px,100%)"><div class="pfill" style="width:${pct}%;background:${col}"></div></div>
+          <div class="pbar" style="width:min(140px,100%)"><div class="pfill" style="width:${pct}%;background:${scolor(val/max)}"></div></div>
         </div>
         <div class="hcontrols">
           <button class="btn btno btns" onclick="upLog('convs',Math.max(0,(tlog().convs||0)-1))">−</button>
@@ -420,29 +391,28 @@ function renderHabits(){
       html+=`<div class="hrow">
         <div><div class="hname">${h.label}</div><div class="hsub">${sub}</div></div>
         <div class="hcontrols">
-          <input class="ninput" type="number" placeholder="min" value="${mins}" style="width:54px" onchange="upLog('selling_min',parseInt(this.value)||0)">
+          <input class="ninput" type="number" placeholder="min" value="${mins}" style="width:56px" onchange="upLog('selling_min',parseInt(this.value)||0)">
           <div class="cb ${chk?'ong':''}" onclick="upLog('${h.id}',${!chk})">${chk?'✓':''}</div>
         </div>
       </div>`;
     } else if(h.type==='pct'){
       const val=log[h.id]||0;
-      const col=scolor(val/100);
       html+=`<div class="hrow">
         <div style="flex:1;min-width:0;margin-right:12px">
           <div class="hname">${h.label}</div>
           <div class="hsub">${sub}</div>
-          <div class="pbar" style="width:min(140px,100%)"><div class="pfill" style="width:${val}%;background:${col}"></div></div>
+          <div class="pbar" style="width:min(140px,100%)"><div class="pfill" style="width:${val}%;background:${scolor(val/100)}"></div></div>
         </div>
         <div class="hcontrols">
-          ${[0,25,50,75,80,100].map(p=>`<button class="btn btno btns" style="padding:3px 6px;${val===p?'background:var(--graphite);color:white;border-color:var(--graphite)':''}" onclick="upLog('food',${p})">${p}%</button>`).join('')}
+          ${[0,25,50,75,80,100].map(p=>`<button class="btn btno btns" style="padding:3px 7px;${val===p?'background:var(--graphite);color:white;border-color:var(--graphite)':''}" onclick="upLog('food',${p})">${p}%</button>`).join('')}
         </div>
       </div>`;
     } else {
       const chk=log[h.id]||false,st=streak(h.id);
       html+=`<div class="hrow">
-        <div><div class="hname">${h.label}</div>${sub?`<div class="hsub">${sub}</div>`:''}  </div>
+        <div><div class="hname">${h.label}</div>${sub?`<div class="hsub">${sub}</div>`:''}</div>
         <div class="hcontrols">
-          ${st>1?`<span class="streak">🔥 ${st}</span>`:''}
+          ${st>1?`<span class="streak">Racha: ${st}</span>`:''}
           <div class="cb ${chk?'onr':''}" onclick="upLog('${h.id}',${!chk})">${chk?'✓':''}</div>
         </div>
       </div>`;
@@ -451,18 +421,14 @@ function renderHabits(){
   document.getElementById('habits-list').innerHTML=html;
 }
 
-// ── Bar chart ─────────────────────────────────────────────
 function renderBarChart(){
   const wd=getWeekDates();
-  const max_h=100;
   let html='';
   wd.forEach((d,i)=>{
-    const val=logs[d]?.convs||0;
-    const target=logs[d]?.emergency?3:10;
-    const pct=Math.min(100,(val/10)*100);
-    const col=val>=target?'#8BAF8B':'#D4927A';
+    const val=logs[d]?.convs||0,target=logs[d]?.emergency?3:10;
+    const pct=Math.min(100,(val/10)*100),col=val>=target?'#8BAF8B':'#D4927A';
     html+=`<div class="bar-col">
-      <div class="bar-val">${val}</div>
+      <div class="bar-val" style="color:${col}">${val}</div>
       <div class="bar-wrap"><div class="bar" style="height:${Math.max(2,pct)}%;background:${col}"></div></div>
       <div class="bar-label">${WD[i]}</div>
     </div>`;
@@ -470,56 +436,45 @@ function renderBarChart(){
   document.getElementById('bar-convs').innerHTML=html;
 }
 
-// ── Line chart canvas ─────────────────────────────────────
 function renderLineChart(){
   const canvas=document.getElementById('line-score');
   if(!canvas)return;
   const ctx=canvas.getContext('2d');
-  const W=canvas.offsetWidth||300,H=120;
+  const W=canvas.offsetWidth||280,H=120;
   canvas.width=W;canvas.height=H;
   const data=Array.from({length:14},(_,i)=>{
     const d=new Date();d.setDate(d.getDate()-13+i);
-    const k=d.toISOString().slice(0,10);
-    return Math.round(calcScore(logs[k],logs[k]?.emergency)*100);
+    return Math.round(calcScore(logs[d.toISOString().slice(0,10)],logs[d.toISOString().slice(0,10)]?.emergency)*100);
   });
   ctx.clearRect(0,0,W,H);
   const pad=16,cW=W-pad*2,cH=H-pad*2;
-  // Grid
   ctx.strokeStyle='#F2DDD6';ctx.lineWidth=1;
-  [0,25,50,75,100].forEach(v=>{
+  [0,50,100].forEach(v=>{
     const y=pad+cH-(v/100)*cH;
     ctx.beginPath();ctx.moveTo(pad,y);ctx.lineTo(W-pad,y);ctx.stroke();
   });
-  // Line
   ctx.strokeStyle='#D4927A';ctx.lineWidth=2;ctx.lineJoin='round';
   ctx.beginPath();
   data.forEach((v,i)=>{
-    const x=pad+(i/(data.length-1))*cW;
-    const y=pad+cH-(v/100)*cH;
+    const x=pad+(i/(data.length-1))*cW,y=pad+cH-(v/100)*cH;
     i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
   });
   ctx.stroke();
-  // Dots
   data.forEach((v,i)=>{
-    const x=pad+(i/(data.length-1))*cW;
-    const y=pad+cH-(v/100)*cH;
+    const x=pad+(i/(data.length-1))*cW,y=pad+cH-(v/100)*cH;
     ctx.beginPath();ctx.arc(x,y,3,0,Math.PI*2);
     ctx.fillStyle='#D4927A';ctx.fill();
   });
 }
 
-// ── Calendar ──────────────────────────────────────────────
 function renderCal(){
   const {days,startDow}=getMonthDates(calState.y,calState.m);
   document.getElementById('cal-title').textContent=MONTHS[calState.m]+' '+calState.y;
   let html='';
   for(let i=0;i<startDow;i++)html+=`<div></div>`;
   days.forEach((d,i)=>{
-    const s=calcScore(logs[d],logs[d]?.emergency);
-    const isT=d===today,has=!!logs[d];
-    const bg=has?scolor(s)+'28':'transparent';
-    const border=isT?'2px solid var(--graphite)':'1px solid transparent';
-    html+=`<div class="cday" style="background:${bg};border:${border};font-weight:${isT?700:400}">${i+1}</div>`;
+    const s=calcScore(logs[d],logs[d]?.emergency),isT=d===today,has=!!logs[d];
+    html+=`<div class="cday" style="background:${has?scolor(s)+'28':'transparent'};border:${isT?'2px solid var(--graphite)':'1px solid transparent'};font-weight:${isT?700:400}">${i+1}</div>`;
   });
   document.getElementById('cal-grid').innerHTML=html;
 }
@@ -531,15 +486,10 @@ function calNav(dir){
   renderCal();
 }
 
-// ── Normas ────────────────────────────────────────────────
 function renderNormas(){
   let html='';
   cfg.normas.forEach((n,i)=>{
-    html+=`<div class="norma">
-      <div class="ndot"></div>
-      <div class="ntext">${n}</div>
-      ${editingNormas?`<button onclick="deleteNorma(${i})" style="margin-left:auto;background:none;border:none;cursor:pointer;color:var(--mid);font-size:16px">×</button>`:''}
-    </div>`;
+    html+=`<div class="norma"><div class="ndot"></div><div class="ntext">${n}</div>${editingNormas?`<button onclick="deleteNorma(${i})" style="margin-left:auto;background:none;border:none;cursor:pointer;color:var(--mid);font-size:16px">×</button>`:''}</div>`;
   });
   document.getElementById('normas-list').innerHTML=html;
 }
@@ -554,36 +504,25 @@ function toggleEditNormas(){
 function addNorma(){
   const inp=document.getElementById('norma-input');
   if(!inp.value.trim())return;
-  cfg.normas.push(inp.value.trim());
-  inp.value='';
-  save('rit_cfg',cfg);
-  renderNormas();
+  cfg.normas.push(inp.value.trim());inp.value='';
+  save('rit_cfg',cfg);renderNormas();
 }
 
 function deleteNorma(i){
-  cfg.normas.splice(i,1);
-  save('rit_cfg',cfg);
-  renderNormas();
+  cfg.normas.splice(i,1);save('rit_cfg',cfg);renderNormas();
 }
 
-// ── Sales ─────────────────────────────────────────────────
 function saveSales(k,v){
   if(!sales[today])sales[today]={};
   sales[today][k]=parseFloat(v)||0;
-  save('rit_sales',sales);
-  refreshSales();
+  save('rit_sales',sales);refreshSales();
 }
 
 function saveMeta(v){
-  cfg.incomeGoal=parseFloat(v)||15000;
-  save('rit_cfg',cfg);
-  refreshSales();
+  cfg.incomeGoal=parseFloat(v)||15000;save('rit_cfg',cfg);refreshSales();
 }
 
-function saveReminder(i,v){
-  cfg.reminders[i]=v;
-  save('rit_cfg',cfg);
-}
+function saveReminder(i,v){cfg.reminders[i]=v;save('rit_cfg',cfg);}
 
 function refreshSales(){
   const ts=sales[today]||{};
@@ -591,115 +530,68 @@ function refreshSales(){
   const {days}=getMonthDates(now.getFullYear(),now.getMonth());
   const mincome=days.reduce((a,d)=>a+(sales[d]?.income||0),0);
   const proj=dom>0?Math.round(mincome/dom*dim):0;
-  const left=cfg.incomeGoal-mincome;
-
   document.getElementById('v-hoy').textContent='$'+(ts.income||0).toLocaleString();
   document.getElementById('v-mes').textContent='$'+mincome.toLocaleString();
   document.getElementById('v-meta-lbl').textContent='Meta: $'+cfg.incomeGoal.toLocaleString();
   document.getElementById('v-proj').textContent='$'+proj.toLocaleString();
   document.getElementById('v-proj').style.color=proj>=cfg.incomeGoal?'var(--success)':'var(--warn)';
   document.getElementById('v-dias').textContent=dom+'d transcurridos';
-  document.getElementById('v-falta').textContent=left<=0?'✓ Meta 🎉':'$'+left.toLocaleString();
+  document.getElementById('v-falta').textContent=(cfg.incomeGoal-mincome)<=0?'Meta lograda':'$'+(cfg.incomeGoal-mincome).toLocaleString();
   document.getElementById('v-mes-bar').style.width=Math.min(100,mincome/cfg.incomeGoal*100)+'%';
-
   const r1=ts.convs>0?Math.round((ts.citas||0)/ts.convs*100):0;
   const r2=ts.citas>0?Math.round((ts.closes||0)/ts.citas*100):0;
   document.getElementById('rate1').textContent=r1+'%';
   document.getElementById('rate2').textContent=r2+'%';
-  document.getElementById('rate1').style.color=r1>=30?'var(--success)':'var(--rose)';
-  document.getElementById('rate2').style.color=r2>=30?'var(--success)':'var(--rose)';
   document.getElementById('rate1-bar').style.width=Math.min(100,r1)+'%';
   document.getElementById('rate2-bar').style.width=Math.min(100,r2)+'%';
   document.getElementById('rate1-bar').style.background=r1>=30?'var(--success)':'var(--rose)';
   document.getElementById('rate2-bar').style.background=r2>=30?'var(--success)':'var(--rose)';
-
-  if(document.getElementById('meta-input')&&!document.getElementById('meta-input').value)
-    document.getElementById('meta-input').value=cfg.incomeGoal;
-  ['convs','citas','closes','income'].forEach(k=>{
-    const el=document.getElementById('s-'+k);
-    if(el&&ts[k])el.value=ts[k];
-  });
+  if(!document.getElementById('meta-input').value)document.getElementById('meta-input').value=cfg.incomeGoal;
+  ['convs','citas','closes','income'].forEach(k=>{const el=document.getElementById('s-'+k);if(el&&ts[k])el.value=ts[k];});
 }
 
-// ── Emergency ─────────────────────────────────────────────
-function toggleEmergency(v){
-  upLog('emergency',v);
-}
+function toggleEmergency(v){upLog('emergency',v);}
 
-// ── Refresh all ───────────────────────────────────────────
 function refreshAll(){
-  const log=tlog(),emergency=em();
-  const score=calcScore(log,emergency);
-
-  // Scores
+  const log=tlog(),emergency=em(),score=calcScore(log,emergency);
   updateRing('ring-hoy',score);
-  updateRing('ring-sem',getWeekDates().reduce((a,d)=>a+calcScore(logs[d],logs[d]?.emergency),0)/7);
-  const now=new Date();
-  const {days:mdays}=getMonthDates(now.getFullYear(),now.getMonth());
+  const wd=getWeekDates();
+  updateRing('ring-sem',wd.reduce((a,d)=>a+calcScore(logs[d],logs[d]?.emergency),0)/7);
+  const{days:mdays}=getMonthDates(new Date().getFullYear(),new Date().getMonth());
   const past=mdays.filter(d=>d<=today);
   updateRing('ring-mes',past.length?past.reduce((a,d)=>a+calcScore(logs[d],logs[d]?.emergency),0)/past.length:0);
-
-  // Nav score
   const navEl=document.getElementById('nav-pct');
   navEl.textContent=Math.round(score*100)+'%';
   navEl.style.color=scolor(score);
-
-  // Estado
   const estado=document.getElementById('score-estado');
-  if(score>=0.8){estado.textContent='✓ Victoria';estado.className='good';}
-  else if(score>=0.5){estado.textContent='En progreso';estado.className='warnc';}
-  else{estado.textContent='Sigue adelante';estado.className='badc';}
-
-  // Convs
+  if(score>=0.8){estado.textContent='Victoria';estado.style.color='var(--success)';}
+  else if(score>=0.5){estado.textContent='En progreso';estado.style.color='var(--warn)';}
+  else{estado.textContent='Empieza';estado.style.color='var(--mid)';}
   const max=emergency?3:10;
   document.getElementById('conv-hoy').textContent=log.convs||0;
   document.getElementById('conv-max').textContent='/'+max;
   document.getElementById('conv-bar').style.width=Math.min(100,((log.convs||0)/max)*100)+'%';
-  document.getElementById('conv-sem').textContent=getWeekDates().reduce((a,d)=>a+(logs[d]?.convs||0),0);
-
-  // Emergency
+  document.getElementById('conv-sem').textContent=wd.reduce((a,d)=>a+(logs[d]?.convs||0),0);
   document.getElementById('emg-banner').classList.toggle('hidden',!emergency);
   document.getElementById('emg-tog').checked=emergency;
-
-  renderHabits();
-  renderBarChart();
-  renderLineChart();
-  renderCal();
-  renderNormas();
-  refreshSales();
+  renderHabits();renderBarChart();renderLineChart();renderCal();renderNormas();refreshSales();
 }
 
-// ── Tabs ──────────────────────────────────────────────────
 function showTab(id,btn){
-  ['hoy','ventas','cal','sys'].forEach(t=>{
-    document.getElementById('tab-'+t).classList.toggle('hidden',t!==id);
-  });
+  ['hoy','ventas','cal','sys'].forEach(t=>document.getElementById('tab-'+t).classList.toggle('hidden',t!==id));
   document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   if(id==='cal')renderCal();
 }
 
-// ── Notifications ─────────────────────────────────────────
 async function askNotif(){
   if(!('Notification' in window))return alert('Tu navegador no soporta notificaciones.');
   const p=await Notification.requestPermission();
-  if(p==='granted'){
-    document.getElementById('notif-btn').textContent='✓ Notificaciones activas';
-    new Notification('ritual.',{body:'¡Notificaciones activadas! 🌸'});
-  }
+  if(p==='granted'){document.getElementById('notif-btn').textContent='Notificaciones activas';new Notification('ritual.',{body:'Notificaciones activadas!'});}
 }
 
-// ── Reminders load ────────────────────────────────────────
-function loadReminders(){
-  cfg.reminders.forEach((v,i)=>{
-    const el=document.getElementById('rem'+i);
-    if(el)el.value=v;
-  });
-}
-
-// ── Init ──────────────────────────────────────────────────
 document.getElementById('fecha-title').textContent=new Date().toLocaleDateString('es-MX',{weekday:'long',day:'numeric',month:'long'});
-loadReminders();
+cfg.reminders.forEach((v,i)=>{const el=document.getElementById('rem'+i);if(el)el.value=v;});
 refreshAll();
 </script>
 </body>
