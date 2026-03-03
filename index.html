@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ritual.</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/recharts/2.8.0/Recharts.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#FAF7F2;--blush:#F2DDD6;--rose:#D4927A;--rose-deep:#B8705A;
+  --graphite:#2C2C2C;--mid:#7A7068;--soft:#C8BFB5;--white:#FFFFFF;
+  --success:#8BAF8B;--warn:#D4B27A;
+}
+body{background:var(--cream);color:var(--graphite);font-family:'DM Sans',sans-serif;min-height:100vh}
+.nav{background:var(--white);border-bottom:1px solid var(--blush);padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:60px;position:sticky;top:0;z-index:100}
+.logo{font-family:'Playfair Display',serif;font-size:20px}.logo span{color:var(--rose)}
+.tabs{display:flex;gap:4px}
+.tab{padding:6px 14px;border-radius:20px;border:none;background:transparent;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--mid);transition:all .2s}
+.tab:hover{background:var(--blush)}
+.tab.active{background:var(--graphite);color:var(--white)}
+.main{max-width:1100px;margin:0 auto;padding:28px 20px}
+.ptitle{font-family:'Playfair Display',serif;font-size:26px;font-weight:600;margin-bottom:4px}
+.psub{font-size:13px;color:var(--mid);margin-bottom:24px}
+.card{background:rgba(255,255,255,0.8);border:1px solid var(--blush);border-radius:16px;padding:20px 22px;backdrop-filter:blur(8px)}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
+.g2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:20px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
+@media(max-width:800px){.g4{grid-template-columns:repeat(2,1fr)}.tabs .tab{padding:6px 10px;font-size:12px}}
+@media(max-width:500px){.g4,.g2,.g3{grid-template-columns:1fr}}
+.hrow{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--blush)}
+.hrow:last-child{border-bottom:none}
+.hname{font-size:14px;font-weight:500}
+.hsub{font-size:12px;color:var(--mid);margin-top:2px}
+.hcontrols{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.cb{width:22px;height:22px;border-radius:6px;border:2px solid var(--soft);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;transition:all .15s;flex-shrink:0;user-select:none}
+.cb.on{background:var(--rose);border-color:var(--rose);color:white}
+.cb.ong{background:var(--graphite);border-color:var(--graphite);color:white}
+.ninput{width:50px;height:30px;border:1.5px solid var(--soft);border-radius:8px;text-align:center;font-family:'DM Sans',sans-serif;font-size:14px;background:var(--white);outline:none}
+.ninput:focus{border-color:var(--rose)}
+.pbar{height:5px;background:var(--blush);border-radius:3px;overflow:hidden;margin-top:5px}
+.pfill{height:100%;border-radius:3px;transition:width .4s}
+.tog{position:relative;width:42px;height:23px;flex-shrink:0}
+.tog input{opacity:0;width:0;height:0}
+.tslider{position:absolute;inset:0;background:var(--soft);border-radius:12px;cursor:pointer;transition:.3s}
+.tslider::before{content:'';position:absolute;width:17px;height:17px;left:3px;top:3px;background:white;border-radius:50%;transition:.3s}
+input:checked+.tslider{background:var(--rose)}
+input:checked+.tslider::before{transform:translateX(19px)}
+.sclabel{font-size:11px;color:var(--mid);text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px}
+.scbig{font-family:'Playfair Display',serif;font-size:38px;font-weight:600;line-height:1}
+.sectitle{font-family:'Playfair Display',serif;font-size:17px;font-weight:600;margin-bottom:14px}
+.streak{display:inline-flex;align-items:center;gap:3px;background:var(--blush);color:var(--rose-deep);padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500}
+.btn{padding:8px 18px;border-radius:10px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;font-size:13px;transition:all .2s}
+.btnd{background:var(--graphite);color:white}.btnd:hover{background:#444}
+.btnr{background:var(--rose);color:white}
+.btno{background:transparent;border:1.5px solid var(--soft);color:var(--graphite)}.btno:hover{border-color:var(--graphite)}
+.btns{padding:5px 12px;font-size:12px}
+.inp{width:100%;padding:9px 13px;border:1.5px solid var(--soft);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:14px;background:var(--white);outline:none}
+.inp:focus{border-color:var(--rose)}
+.lbl{font-size:11px;font-weight:500;color:var(--mid);text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px;display:block}
+.norma{display:flex;align-items:flex-start;gap:8px;padding:9px 0;border-bottom:1px solid var(--blush)}
+.norma:last-child{border-bottom:none}
+.ndot{width:5px;height:5px;border-radius:50%;background:var(--rose);margin-top:8px;flex-shrink:0}
+.ntext{font-size:14px;line-height:1.5}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.cal-hdr{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:6px}
+.cal-hdr span{text-align:center;font-size:10px;color:var(--mid);text-transform:uppercase;letter-spacing:.05em}
+.cday{aspect-ratio:1;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;cursor:default;position:relative}
+.emg{background:linear-gradient(135deg,#F2DDD6,#F7EAD8);border:1.5px solid var(--rose);border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.flex{display:flex}.aic{align-items:center}.jsb{justify-content:space-between}
+.gap8{gap:8px}.gap14{gap:14px}
+.mt8{margin-top:8px}.mt14{margin-top:14px}.mt16{margin-top:16px}
+.mb8{margin-bottom:8px}.mb16{margin-bottom:16px}.mb20{margin-bottom:20px}
+.tc{text-align:center}
+.good{color:var(--success)}.warnc{color:var(--warn)}.badc{color:var(--rose-deep)}
+.salesnum{font-family:'Playfair Display',serif;font-size:24px;font-weight:600}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const {useState,useEffect,useCallback}=React;
+const {BarChart,Bar,LineChart,Line,XAxis,YAxis,Tooltip,ResponsiveContainer,CartesianGrid,Cell}=Recharts;
+
+const WD=["Lu","Ma","Mi","Ju","Vi","Sá","Do"];
+const MONTHS=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+const todayKey=()=>new Date().toISOString().slice(0,10);
+
+const HABITS=(em=false)=>[
+  {id:"convs",label:"Conversaciones",sub:em?"Meta: 3 (Emergencia)":"Meta: 10 (L–V)",type:"num",max:em?3:10,w:0.40},
+  {id:"selling",label:"Selling Learning",sub:"L–V · anota minutos",type:"checkmin",w:0.25},
+  {id:"gym",label:"Gym",sub:"4×semana",type:"check",w:0.10},
+  {id:"walk",label:"Walk con Polo",sub:"7×semana",type:"check",w:0.05},
+  {id:"food",label:"Comidas saludables",sub:"Meta ≥80% del día",type:"pct",w:0.15},
+  {id:"journal",label:"Journaling",sub:"5×semana",type:"check",w:0.025},
+  {id:"reading",label:"Lectura",sub:"5×semana",type:"check",w:0.025},
+  {id:"vit_m",label:"Vitaminas Mañana",sub:"",type:"check",w:0},
+  {id:"vit_t",label:"Vitaminas Tarde",sub:"",type:"check",w:0},
+  {id:"vit_n",label:"Vitaminas Noche",sub:"",type:"check",w:0},
+];
+
+function calcScore(log,em=false){
+  if(!log)return 0;
+  const hs=HABITS(em);
+  let t=0;
+  hs.forEach(h=>{
+    if(h.w===0)return;
+    let v=0;
+    if(h.type==="num")v=Math.min(1,(log[h.id]||0)/h.max);
+    else if(h.type==="check")v=log[h.id]?1:0;
+    else if(h.type==="checkmin")v=log[h.id]?1:0;
+    else if(h.type==="pct")v=(log[h.id]||0)/100;
+    t+=v*h.w;
+  });
+  const vit=((log.vit_m?1:0)+(log.vit_t?1:0)+(log.vit_n?1:0))/3*0.05;
+  return Math.min(1,t+vit);
+}
+
+function scolor(s){return s>=0.8?"#8BAF8B":s>=0.5?"#D4B27A":"#D4927A"}
+
+function Ring({score,size=88}){
+  const st=7,r=(size-st*2)/2,c=2*Math.PI*r,d=c*score;
+  return(
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+      <circle cx={size/2} cy={size/2} r={r} fill="none" stroke="#F2DDD6" strokeWidth={st}/>
+      <circle cx={size/2} cy={size/2} r={r} fill="none" stroke={scolor(score)} strokeWidth={st}
+        strokeDasharray={`${d} ${c}`} strokeLinecap="round"
+        transform={`rotate(-90 ${size/2} ${size/2})`} style={{transition:"stroke-dasharray .5s"}}/>
+      <text x={size/2} y={size/2} textAnchor="middle" dominantBaseline="central"
+        style={{fontFamily:"'Playfair Display',serif",fontSize:size*.21,fill:"#2C2C2C",fontWeight:600}}>
+        {Math.round(score*100)}%
+      </text>
+    </svg>
+  );
+}
+
+const TT=({active,payload,label})=>{
+  if(!active||!payload?.length)return null;
+  return <div style={{background:"white",border:"1px solid #F2DDD6",padding:"7px 11px",borderRadius:8,fontSize:12}}>
+    <div style={{fontWeight:500}}>{label}</div>
+    <div style={{color:"#D4927A"}}>{payload[0]?.value}</div>
+  </div>;
+};
+
+function getWeekDates(){
+  const n=new Date(),m=new Date(n);
+  m.setDate(n.getDate()-((n.getDay()+6)%7));
+  return Array.from({length:7},(_,i)=>{const d=new Date(m);d.setDate(m.getDate()+i);return d.toISOString().slice(0,10);});
+}
+
+function getMonthDates(y,mo){
+  const last=new Date(y,mo+1,0),days=[];
+  for(let d=1;d<=last.getDate();d++)days.push(new Date(y,mo,d).toISOString().slice(0,10));
+  return{days,startDow:(new Date(y,mo,1).getDay()+6)%7};
+}
+
+const DEF_SETTINGS={
+  incomeGoal:15000,
+  normas:["Nunca fallar dos veces consecutivas.","El día cuenta si cumplo lead measures.","80% = victoria.","Modo Emergencia: conversaciones bajan a 3, selling a 15 min.","Los hábitos forman sistemas, los sistemas forman resultados."],
+  reminders:["09:00","12:30","16:30","21:00"]
+};
+
+function App(){
+  const [tab,setTab]=useState("hoy");
+  const [logs,setLogs]=useState({});
+  const [sales,setSales]=useState({});
+  const [cfg,setCfg]=useState(DEF_SETTINGS);
+  const [calM,setCalM]=useState(()=>{const n=new Date();return{y:n.getFullYear(),m:n.getMonth()};});
+  const [editN,setEditN]=useState(false);
+  const [nInput,setNInput]=useState("");
+  const [notif,setNotif]=useState(false);
+  const [ready,setReady]=useState(false);
+
+  useEffect(()=>{
+    try{
+      const l=localStorage.getItem("rit_logs");if(l)setLogs(JSON.parse(l));
+      const s=localStorage.getItem("rit_sales");if(s)setSales(JSON.parse(s));
+      const c=localStorage.getItem("rit_cfg");if(c)setCfg(JSON.parse(c));
+    }catch(e){}
+    setReady(true);
+  },[]);
+
+  useEffect(()=>{if(ready)localStorage.setItem("rit_logs",JSON.stringify(logs));},[logs,ready]);
+  useEffect(()=>{if(ready)localStorage.setItem("rit_sales",JSON.stringify(sales));},[sales,ready]);
+  useEffect(()=>{if(ready)localStorage.setItem("rit_cfg",JSON.stringify(cfg));},[cfg,ready]);
+
+  const today=todayKey();
+  const tlog=logs[today]||{};
+  const em=tlog.emergency||false;
+  const habits=HABITS(em);
+
+  const upLog=(k,v)=>setLogs(p=>({...p,[today]:{...p[today],[k]:v}}));
+  const upSales=(k,v)=>setSales(p=>({...p,[today]:{...p[today],[k]:v}}));
+
+  const ts=calcScore(tlog,em);
+  const wd=getWeekDates();
+  const ws=wd.reduce((a,d)=>a+calcScore(logs[d],logs[d]?.emergency),0)/7;
+  const {days:mdays}=getMonthDates(new Date().getFullYear(),new Date().getMonth());
+  const past=mdays.filter(d=>d<=today);
+  const ms=past.length?past.reduce((a,d)=>a+calcScore(logs[d],logs[d]?.emergency),0)/past.length:0;
+
+  const convData=wd.map((d,i)=>({name:WD[i],value:logs[d]?.convs||0,target:logs[d]?.emergency?3:10}));
+  const last14=Array.from({length:14},(_,i)=>{
+    const d=new Date();d.setDate(d.getDate()-13+i);
+    const k=d.toISOString().slice(0,10);
+    return{name:d.getDate()+"/"+(d.getMonth()+1),value:Math.round(calcScore(logs[k],logs[k]?.emergency)*100)};
+  });
+
+  const tsales=sales[today]||{};
+  const now=new Date(),dom=now.getDate(),dim=new Date(now.getFullYear(),now.getMonth()+1,0).getDate();
+  const mincome=mdays.reduce((a,d)=>a+(sales[d]?.income||0),0);
+  const proj=dom>0?Math.round(mincome/dom*dim):0;
+
+  const streak=(id)=>{
+    let s=0;const d=new Date();
+    while(s<365){
+      const k=d.toISOString().slice(0,10);
+      const l=logs[k];if(!l)break;
+      const v=id==="convs"?(l[id]||0)>0:l[id];
+      if(!v)break;s++;d.setDate(d.getDate()-1);
+    }
+    return s;
+  };
+
+  const askNotif=async()=>{
+    if("Notification"in window){
+      const p=await Notification.requestPermission();
+      setNotif(p==="granted");
+      if(p==="granted")new Notification("ritual.",{body:"¡Notificaciones activadas! 🌸"});
+    }
+  };
+
+  const renderHabit=(h)=>{
+    if(h.type==="num"){
+      const val=tlog[h.id]||0,pct=Math.min(1,val/h.max);
+      return(
+        <div className="hrow" key={h.id}>
+          <div style={{minWidth:0,flex:1,marginRight:12}}>
+            <div className="hname">{h.label}</div>
+            <div className="hsub">{h.sub}</div>
+            <div className="pbar" style={{width:"min(140px,100%)"}}>
+              <div className="pfill" style={{width:`${pct*100}%`,background:scolor(pct)}}/>
+            </div>
+          </div>
+          <div className="hcontrols">
+            <button className="btn btno btns" onClick={()=>upLog(h.id,Math.max(0,val-1))}>−</button>
+            <input className="ninput" type="number" value={val} min={0} onChange={e=>upLog(h.id,parseInt(e.target.value)||0)}/>
+            <button className="btn btno btns" onClick={()=>upLog(h.id,val+1)}>+</button>
+            <span style={{fontSize:12,color:"var(--mid)"}}>/{h.max}</span>
+          </div>
+        </div>
+      );
+    }
+    if(h.type==="checkmin"){
+      const chk=tlog[h.id]||false;
+      return(
+        <div className="hrow" key={h.id}>
+          <div><div className="hname">{h.label}</div><div className="hsub">{h.sub}</div></div>
+          <div className="hcontrols">
+            <input className="ninput" type="number" placeholder="min" value={tlog.selling_min||""} style={{width:54}}
+              onChange={e=>upLog("selling_min",parseInt(e.target.value)||0)}/>
+            <div className={`cb ${chk?"ong":""}`} onClick={()=>upLog(h.id,!chk)}>{chk&&"✓"}</div>
+          </div>
+        </div>
+      );
+    }
+    if(h.type==="pct"){
+      const val=tlog[h.id]||0;
+      return(
+        <div className="hrow" key={h.id}>
+          <div style={{minWidth:0,flex:1,marginRight:12}}>
+            <div className="hname">{h.label}</div>
+            <div className="hsub">{h.sub}</div>
+            <div className="pbar" style={{width:"min(140px,100%)"}}>
+              <div className="pfill" style={{width:`${val}%`,background:scolor(val/100)}}/>
+            </div>
+          </div>
+          <div className="hcontrols">
+            {[0,25,50,75,80,100].map(p=>(
+              <button key={p} className="btn btno btns"
+                style={{padding:"3px 7px",background:val===p?"var(--graphite)":"",color:val===p?"white":""}}
+                onClick={()=>upLog(h.id,p)}>{p}%</button>
+            ))}
+          </div>
+        </div>
+      );
+    }
+    const chk=tlog[h.id]||false,st=streak(h.id);
+    return(
+      <div className="hrow" key={h.id}>
+        <div><div className="hname">{h.label}</div>{h.sub&&<div className="hsub">{h.sub}</div>}</div>
+        <div className="hcontrols">
+          {st>1&&<span className="streak">🔥 {st}</span>}
+          <div className={`cb ${chk?"on":""}`} onClick={()=>upLog(h.id,!chk)}>{chk&&"✓"}</div>
+        </div>
+      </div>
+    );
+  };
+
+  const {days:cdays,startDow:csd}=getMonthDates(calM.y,calM.m);
+
+  if(!ready)return <div style={{display:"flex",alignItems:"center",justifyContent:"center",height:"100vh",fontFamily:"'Playfair Display',serif",fontSize:22}}>ritual.</div>;
+
+  return(
+    <div>
+      <nav className="nav">
+        <div className="logo" style={{fontFamily:"'Playfair Display',serif"}}>ritual<span>.</span></div>
+        <div className="tabs">
+          {[{id:"hoy",l:"Hoy"},{id:"ventas",l:"Ventas"},{id:"cal",l:"Calendario"},{id:"sys",l:"Sistema"}].map(t=>(
+            <button key={t.id} className={`tab${tab===t.id?" active":""}`} onClick={()=>setTab(t.id)}>{t.l}</button>
+          ))}
+        </div>
+        <div style={{fontSize:12,color:"var(--mid)"}}>
+          <span style={{fontWeight:600,color:scolor(ts)}}>{Math.round(ts*100)}%</span> hoy
+        </div>
+      </nav>
+
+      <main className="main">
+
+        {tab==="hoy"&&(
+          <div>
+            <h1 className="ptitle">{new Date().toLocaleDateString("es-MX",{weekday:"long",day:"numeric",month:"long"})}</h1>
+            <p className="psub">Sistema de ejecución · 12 Week Year</p>
+
+            {em&&(
+              <div className="emg">
+                <span style={{fontSize:20}}>⚡</span>
+                <div>
+                  <div style={{fontSize:13,color:"var(--rose-deep)",fontWeight:500}}>Modo Emergencia activado — Meta: 3 convs · Selling: 15 min</div>
+                  <div style={{fontSize:12,color:"var(--rose)",marginTop:2}}>El día cuenta. Tú puedes. 💪</div>
+                </div>
+              </div>
+            )}
+
+            <div className="g4">
+              <div className="card tc">
+                <Ring score={ts}/>
+                <div className="sclabel mt8">Score Hoy</div>
+                <div className={`score-pct mt8 ${ts>=0.8?"good":ts>=0.5?"warnc":"badc"}`} style={{fontSize:13,fontWeight:500}}>
+                  {ts>=0.8?"✓ Victoria":ts>=0.5?"En progreso":"Sigue adelante"}
+                </div>
+              </div>
+              <div className="card tc">
+                <Ring score={ws}/>
+                <div className="sclabel mt8">Score Semana</div>
+              </div>
+              <div className="card tc">
+                <Ring score={ms}/>
+                <div className="sclabel mt8">Score Mes</div>
+              </div>
+              <div className="card">
+                <div className="sclabel mb8">Conversaciones hoy</div>
+                <div className="scbig">{tlog.convs||0}<span style={{fontSize:18,color:"var(--mid)"}}>/{em?3:10}</span></div>
+                <div className="pbar mt8">
+                  <div className="pfill" style={{width:`${Math.min(100,((tlog.convs||0)/(em?3:10))*100)}%`,background:"var(--rose)"}}/>
+                </div>
+                <div className="sclabel mt8">Semana: {wd.reduce((a,d)=>a+(logs[d]?.convs||0),0)}/50</div>
+              </div>
+            </div>
+
+            <div className="card mb20">
+              <div className="flex aic jsb mb16">
+                <div className="sectitle" style={{marginBottom:0}}>Hábitos de Hoy</div>
+                <div className="flex aic gap8">
+                  <span style={{fontSize:13,color:"var(--mid)"}}>Modo Emergencia</span>
+                  <label className="tog">
+                    <input type="checkbox" checked={em} onChange={e=>upLog("emergency",e.target.checked)}/>
+                    <span className="tslider"></span>
+                  </label>
+                </div>
+              </div>
+              {habits.map(renderHabit)}
+            </div>
+
+            <div className="g2">
+              <div className="card">
+                <div className="sectitle">Conversaciones · Semana</div>
+                <ResponsiveContainer width="100%" height={150}>
+                  <BarChart data={convData} barSize={22}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#F2DDD6" vertical={false}/>
+                    <XAxis dataKey="name" tick={{fontSize:12,fill:"#7A7068"}} axisLine={false} tickLine={false}/>
+                    <YAxis tick={{fontSize:11,fill:"#7A7068"}} axisLine={false} tickLine={false}/>
+                    <Tooltip content={<TT/>}/>
+                    <Bar dataKey="value" radius={[5,5,0,0]}>
+                      {convData.map((e,i)=><Cell key={i} fill={e.value>=e.target?"#8BAF8B":"#D4927A"}/>)}
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+              <div className="card">
+                <div className="sectitle">Score · 14 días</div>
+                <ResponsiveContainer width="100%" height={150}>
+                  <LineChart data={last14}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="#F2DDD6" vertical={false}/>
+                    <XAxis dataKey="name" tick={{fontSize:10,fill:"#7A7068"}} axisLine={false} tickLine={false}/>
+                    <YAxis domain={[0,100]} tick={{fontSize:10,fill:"#7A7068"}} axisLine={false} tickLine={false}/>
+                    <Tooltip content={<TT/>}/>
+                    <Line type="monotone" dataKey="value" stroke="#D4927A" strokeWidth={2} dot={{fill:"#D4927A",r:3}}/>
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {tab==="ventas"&&(
+          <div>
+            <h1 className="ptitle">Ventas & Métricas</h1>
+            <p className="psub">Pipeline diario y proyección mensual</p>
+            <div className="g4 mb20">
+              <div className="card tc">
+                <div className="sclabel">Ingresos hoy</div>
+                <div className="salesnum good mt8">${(tsales.income||0).toLocaleString()}</div>
+              </div>
+              <div className="card tc">
+                <div className="sclabel">Ingresos mes</div>
+                <div className="salesnum mt8">${mincome.toLocaleString()}</div>
+                <div style={{fontSize:12,color:"var(--mid)",marginTop:2}}>Meta: ${cfg.incomeGoal.toLocaleString()}</div>
+                <div className="pbar mt8">
+                  <div className="pfill" style={{width:`${Math.min(100,mincome/cfg.incomeGoal*100)}%`,background:"var(--success)"}}/>
+                </div>
+              </div>
+              <div className="card tc">
+                <div className="sclabel">Proyección mes</div>
+                <div className="salesnum mt8" style={{color:proj>=cfg.incomeGoal?"var(--success)":"var(--warn)"}}>${proj.toLocaleString()}</div>
+                <div style={{fontSize:12,color:"var(--mid)",marginTop:2}}>{dom}d transcurridos</div>
+              </div>
+              <div className="card tc">
+                <div className="sclabel">Falta para meta</div>
+                <div className="salesnum mt8">{mincome>=cfg.incomeGoal?"✓ Meta 🎉":`$${(cfg.incomeGoal-mincome).toLocaleString()}`}</div>
+              </div>
+            </div>
+            <div className="g2">
+              <div className="card">
+                <div className="sectitle">Registro de Hoy</div>
+                <div style={{display:"grid",gap:11}}>
+                  {[{k:"convs",l:"Conversaciones"},{k:"citas",l:"Citas"},{k:"closes",l:"Cierres"},{k:"income",l:"Ingresos ($)"}].map(f=>(
+                    <div key={f.k}>
+                      <label className="lbl">{f.l}</label>
+                      <input className="inp" type="number" value={tsales[f.k]||""} placeholder="0" onChange={e=>upSales(f.k,parseFloat(e.target.value)||0)}/>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="card">
+                <div className="sectitle">Conversión & Meta</div>
+                <div style={{display:"grid",gap:14}}>
+                  {[
+                    {l:"Citas / Conversaciones",r:tsales.convs>0?Math.round((tsales.citas||0)/tsales.convs*100):0},
+                    {l:"Cierres / Citas",r:tsales.citas>0?Math.round((tsales.closes||0)/tsales.citas*100):0},
+                  ].map(r=>(
+                    <div key={r.l}>
+                      <div className="flex aic jsb mb8">
+                        <span style={{fontSize:13}}>{r.l}</span>
+                        <span style={{fontWeight:600,color:r.r>=30?"var(--success)":"var(--rose)"}}>{r.r}%</span>
+                      </div>
+                      <div className="pbar"><div className="pfill" style={{width:`${Math.min(100,r.r)}%`,background:r.r>=30?"var(--success)":"var(--rose)"}}/></div>
+                    </div>
+                  ))}
+                  <div>
+                    <label className="lbl">Meta ingresos mensual ($)</label>
+                    <input className="inp" type="number" value={cfg.incomeGoal} onChange={e=>setCfg(c=>({...c,incomeGoal:parseFloat(e.target.value)||15000}))}/>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {tab==="cal"&&(
+          <div>
+            <h1 className="ptitle">Calendario</h1>
+            <p className="psub">Historial de ejecución</p>
+            <div className="card">
+              <div className="flex aic jsb mb16">
+                <button className="btn btno btns" onClick={()=>setCalM(c=>({y:c.m===0?c.y-1:c.y,m:c.m===0?11:c.m-1}))}>‹</button>
+                <span style={{fontFamily:"'Playfair Display',serif",fontSize:17,fontWeight:600}}>{MONTHS[calM.m]} {calM.y}</span>
+                <button className="btn btno btns" onClick={()=>setCalM(c=>({y:c.m===11?c.y+1:c.y,m:c.m===11?0:c.m+1}))}>›</button>
+              </div>
+              <div className="cal-hdr">{WD.map(d=><span key={d}>{d}</span>)}</div>
+              <div className="cal-grid">
+                {Array.from({length:csd}).map((_,i)=><div key={`e${i}`} style={{aspectRatio:"1"}}/>)}
+                {cdays.map((d,i)=>{
+                  const s=calcScore(logs[d],logs[d]?.emergency),isT=d===today,has=!!logs[d];
+                  return(
+                    <div key={d} className="cday" style={{
+                      background:has?`${scolor(s)}28`:"transparent",
+                      border:isT?"2px solid var(--graphite)":"1px solid transparent",
+                      fontWeight:isT?700:400
+                    }}>{i+1}</div>
+                  );
+                })}
+              </div>
+              <div className="flex gap14 mt16" style={{fontSize:12,color:"var(--mid)",flexWrap:"wrap"}}>
+                <div className="flex aic gap8"><div style={{width:11,height:11,borderRadius:3,background:"#8BAF8B40"}}></div>≥80%</div>
+                <div className="flex aic gap8"><div style={{width:11,height:11,borderRadius:3,background:"#D4B27A40"}}></div>50–79%</div>
+                <div className="flex aic gap8"><div style={{width:11,height:11,borderRadius:3,background:"#D4927A40"}}></div>&lt;50%</div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {tab==="sys"&&(
+          <div>
+            <h1 className="ptitle">Sistema & Normas</h1>
+            <p className="psub">Tus reglas del juego · Atomic Habits + 12 Week Year</p>
+            <div className="g2 mb20">
+              <div className="card">
+                <div className="sectitle">Mis Normas</div>
+                {cfg.normas.map((n,i)=>(
+                  <div key={i} className="norma">
+                    <div className="ndot"/>
+                    <div className="ntext">{n}</div>
+                    {editN&&<button style={{marginLeft:"auto",background:"none",border:"none",cursor:"pointer",color:"var(--mid)",fontSize:16}} onClick={()=>setCfg(c=>({...c,normas:c.normas.filter((_,j)=>j!==i)}))}>×</button>}
+                  </div>
+                ))}
+                {editN&&(
+                  <div className="flex gap8 mt14">
+                    <input className="inp" style={{flex:1}} placeholder="Nueva norma..." value={nInput} onChange={e=>setNInput(e.target.value)}
+                      onKeyDown={e=>{if(e.key==="Enter"&&nInput.trim()){setCfg(c=>({...c,normas:[...c.normas,nInput.trim()]}));setNInput("");}}}/>
+                    <button className="btn btnr btns" onClick={()=>{if(nInput.trim()){setCfg(c=>({...c,normas:[...c.normas,nInput.trim()]}));setNInput("");}}}>+</button>
+                  </div>
+                )}
+                <button className="btn btno btns mt14" onClick={()=>setEditN(!editN)}>{editN?"✓ Guardar":"Editar normas"}</button>
+              </div>
+              <div className="card">
+                <div className="sectitle">Sistema de Emergencia</div>
+                {["Conversaciones bajan de 10 → 3","Selling learning: solo 15 min mínimo","Score se recalcula con metas reducidas","80% ajustado = victoria sin culpa","Actívalo con el toggle en Hábitos de Hoy"].map((n,i)=>(
+                  <div key={i} className="norma"><div className="ndot"/><div className="ntext">{n}</div></div>
+                ))}
+              </div>
+            </div>
+            <div className="card">
+              <div className="sectitle">Recordatorios</div>
+              <div className="g4" style={{marginBottom:16}}>
+                {[{l:"🌅 Producción mañana",i:0},{l:"🥗 Almuerzo + vitaminas",i:1},{l:"💪 Bloque fuerte tarde",i:2},{l:"🌙 Cierre de día",i:3}].map(r=>(
+                  <div key={r.i}>
+                    <label className="lbl">{r.l}</label>
+                    <input className="inp" type="time" value={cfg.reminders[r.i]||""} onChange={e=>setCfg(c=>{const rem=[...c.reminders];rem[r.i]=e.target.value;return{...c,reminders:rem};})}/>
+                  </div>
+                ))}
+              </div>
+              <button className="btn btnd btns" onClick={askNotif}>{notif?"✓ Notificaciones activas":"Activar notificaciones del navegador"}</button>
+            </div>
+          </div>
+        )}
+
+      </main>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+</script>
+</body>
+</html>
