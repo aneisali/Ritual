@@ -292,6 +292,7 @@ const today=todayKey();
 let calState={y:new Date().getFullYear(),m:new Date().getMonth()};
 let editingNormas=false;
 let editingDay=null;
+document.addEventListener('DOMContentLoaded',()=>document.getElementById('modal-bg').classList.add('hidden'));
 const tlog=()=>logs[today]||{};
 const em=()=>tlog().emergency||false;
 const WD=["Lu","Ma","Mi","Ju","Vi","Sa","Do"];
