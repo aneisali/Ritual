@@ -282,7 +282,7 @@ input:checked+.tsl::before{transform:translateX(19px)}
 </div>
 
 <script>
-const todayKey=()=>new Date().toISOString().slice(0,10);
+const todayKey=()=>{const n=new Date();return n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')+'-'+String(n.getDate()).padStart(2,'0');};
 const load=(k,def)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):def;}catch{return def;}};
 const save=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
 let logs=load('rit_logs',{});
@@ -292,7 +292,7 @@ const today=todayKey();
 let calState={y:new Date().getFullYear(),m:new Date().getMonth()};
 let editingNormas=false;
 let editingDay=null;
-document.addEventListener('DOMContentLoaded',()=>document.getElementById('modal-bg').classList.add('hidden'));
+
 const tlog=()=>logs[today]||{};
 const em=()=>tlog().emergency||false;
 const WD=["Lu","Ma","Mi","Ju","Vi","Sa","Do"];
