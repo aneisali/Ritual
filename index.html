@@ -71,7 +71,7 @@ input:checked+.tsl::before{transform:translateX(19px)}
 .gap8{gap:8px}.mt8{margin-top:8px}.mt14{margin-top:14px}.mt16{margin-top:16px}
 .mb8{margin-bottom:8px}.mb14{margin-bottom:14px}.mb16{margin-bottom:16px}
 .good{color:var(--success)}.warnc{color:var(--warn)}.badc{color:var(--rose-deep)}
-.hidden{display:none}
+.hidden{display:none!important}
 .salesnum{font-family:'Playfair Display',serif;font-size:24px;font-weight:600}
 .gridform{display:grid;gap:11px}
 .legend{display:flex;gap:14px;margin-top:12px;flex-wrap:wrap}
@@ -270,7 +270,7 @@ input:checked+.tsl::before{transform:translateX(19px)}
 </main>
 
 <!-- MODAL EDITAR DIA -->
-<div id="modal-bg" class="modal-bg hidden" onclick="closeModalBg(event)">
+<div id="modal-bg" class="modal-bg" style="display:none" onclick="closeModalBg(event)">
   <div class="modal">
     <div class="modal-title" id="modal-title">Editar dia</div>
     <div class="modal-sub" id="modal-sub"></div>
